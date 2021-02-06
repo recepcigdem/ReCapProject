@@ -23,17 +23,7 @@ namespace DataAccess.Concrete.InMemory
             };
         }
 
- 
-        public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
         {
-            return filter == null
-                ? _brands.ToList()
-                : _brands.Where(filter.Compile()).ToList();
-        }
-
-        public Brand Get(Expression<Func<Brand, bool>> filter)
-        {
-            return _brands.SingleOrDefault(filter.Compile());
         }
 
         public void Add(Brand brand)

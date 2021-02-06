@@ -29,9 +29,7 @@ namespace DataAccess.Concrete.InMemory
                 : _colors.Where(filter.Compile()).ToList();
         }
 
-        public Color Get(Expression<Func<Color, bool>> filter)
         {
-            return _colors.SingleOrDefault(filter.Compile());
         }
 
         public void Add(Color color)
