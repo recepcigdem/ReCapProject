@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfColorDal:IColorDal
+    public class EfColorDal : IColorDal
     {
         public List<Color> GetAll(Expression<Func<Color, bool>> filter = null)
         {
-            using (RentACarContext context= new RentACarContext())
+            using (RentACarContext context = new RentACarContext())
             {
                 return filter == null
                     ? context.Set<Color>().ToList()
@@ -23,7 +23,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public Color Get(Expression<Func<Color, bool>> filter)
         {
-            using (RentACarContext context= new RentACarContext())
+            using (RentACarContext context = new RentACarContext())
             {
                 return context.Set<Color>().SingleOrDefault(filter);
             }
@@ -31,11 +31,11 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Add(Color entity)
         {
-            using (RentACarContext context= new RentACarContext())
+            using (RentACarContext context = new RentACarContext())
             {
-               var addedColor = context.Entry(entity);
-               addedColor.State = EntityState.Added;
-               context.SaveChanges();
+                var addedColor = context.Entry(entity);
+                addedColor.State = EntityState.Added;
+                context.SaveChanges();
             }
         }
 

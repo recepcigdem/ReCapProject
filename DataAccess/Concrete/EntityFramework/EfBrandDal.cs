@@ -9,17 +9,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfBrandDal:IBrandDal
+    public class EfBrandDal : IBrandDal
     {
         public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
         {
-            using (RentACarContext context= new RentACarContext())
+            using (RentACarContext context = new RentACarContext())
             {
 
                 return filter == null
                     ? context.Set<Brand>().ToList()
                     : context.Set<Brand>().Where(filter).ToList();
-            } 
+            }
         }
 
         public Brand Get(Expression<Func<Brand, bool>> filter)
@@ -32,7 +32,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Add(Brand entity)
         {
-            using (RentACarContext context= new RentACarContext())
+            using (RentACarContext context = new RentACarContext())
             {
                 var addedBrand = context.Entry(entity);
                 addedBrand.State = EntityState.Added;
@@ -52,7 +52,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Delete(Brand entity)
         {
-            using (RentACarContext context= new RentACarContext())
+            using (RentACarContext context = new RentACarContext())
             {
                 var deletedBrand = context.Entry(entity);
                 deletedBrand.State = EntityState.Deleted;

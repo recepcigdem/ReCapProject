@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarDal:ICarDal
+    public class EfCarDal : ICarDal
     {
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            using (RentACarContext context= new RentACarContext())
+            using (RentACarContext context = new RentACarContext())
             {
                 return filter == null
                     ? context.Set<Car>().ToList()
@@ -23,7 +23,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public Car Get(Expression<Func<Car, bool>> filter)
         {
-            using (RentACarContext context= new RentACarContext())
+            using (RentACarContext context = new RentACarContext())
             {
                 return context.Set<Car>().SingleOrDefault(filter);
             }
@@ -31,7 +31,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Add(Car entity)
         {
-            using (RentACarContext context= new RentACarContext())
+            using (RentACarContext context = new RentACarContext())
             {
                 var addedCar = context.Entry(entity);
                 addedCar.State = EntityState.Added;

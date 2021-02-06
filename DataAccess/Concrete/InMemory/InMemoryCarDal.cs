@@ -25,7 +25,17 @@ namespace DataAccess.Concrete.InMemory
             };
         }
 
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
+            return filter == null
+                ? _cars.ToList()
+                : _cars.Where(filter.Compile()).ToList();
+        }
+
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            return _cars.SingleOrDefault(filter.Compile());
         }
 
         public void Add(Car car)
