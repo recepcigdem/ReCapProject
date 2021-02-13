@@ -9,7 +9,7 @@ namespace ConsoleUI
 {
     class Program
     {
-        
+
         static void Main(string[] args)
         {
             //AddCar();
@@ -30,65 +30,123 @@ namespace ConsoleUI
         private static void CarDetailDto()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (CarDetailDto car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+
+            if (result.Success == true)
             {
-                Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
-                                  " Günlük Fiyat: " + car.DailyPrice);
+                foreach (CarDetailDto car in result.Data)
+                {
+                    Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
+                                      " Günlük Fiyat: " + car.DailyPrice);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
         }
 
         private static void DeleteCar()
         {
             CarManager carManager = new CarManager(new EfCarDal());
             carManager.Delete(new Car
-                {Id = 1});
-            foreach (CarDetailDto car in carManager.GetCarDetails())
+            { Id = 1 });
+            var result = carManager.GetCarDetails();
+            if (result.Success == true)
             {
-                Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
-                                  " Günlük Fiyat: " + car.DailyPrice);
+                foreach (CarDetailDto car in result.Data)
+                {
+                    Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
+                                      " Günlük Fiyat: " + car.DailyPrice);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
         }
 
         private static void UpdateCar()
         {
             CarManager carManager = new CarManager(new EfCarDal());
             carManager.Update(new Car
-                {Id = 1, BrandId = 1, ColorId = 1, DailyPrice = 300, Description = "Renault Mavi 2014", ModelYear = 2014});
-            foreach (CarDetailDto car in carManager.GetCarDetails())
+            { Id = 1, BrandId = 1, ColorId = 1, DailyPrice = 300, Description = "Renault Mavi 2014", ModelYear = 2014 });
+            var result = carManager.GetCarDetails();
+            if (result.Success == true)
             {
-                Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
-                                  " Günlük Fiyat: " + car.DailyPrice);
+                foreach (CarDetailDto car in result.Data)
+                {
+                    Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
+                                      " Günlük Fiyat: " + car.DailyPrice);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
         }
 
         private static void GetAllByBrandId(int brandId)
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (CarDetailDto car in carManager.GetCarDetails())
+
+            var result = carManager.GetCarDetails();
+            if (result.Success == true)
             {
-                Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
-                                  " Günlük Fiyat: " + car.DailyPrice);
+                foreach (CarDetailDto car in result.Data)
+                {
+                    Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
+                                      " Günlük Fiyat: " + car.DailyPrice);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
         }
 
         private static void GetAllByColorId(int colorId)
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (CarDetailDto car in carManager.GetCarDetails())
+
+            var result = carManager.GetCarDetails();
+            if (result.Success == true)
             {
-                Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
-                                  " Günlük Fiyat: " + car.DailyPrice);
+                foreach (CarDetailDto car in result.Data)
+                {
+                    Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
+                                      " Günlük Fiyat: " + car.DailyPrice);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
         }
 
         private static void GetAllCar()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (CarDetailDto car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+
+            if (result.Success == true)
             {
-                Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
-                                  " Günlük Fiyat: " + car.DailyPrice);
+                foreach (CarDetailDto car in result.Data)
+                {
+                    Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
+                                      " Günlük Fiyat: " + car.DailyPrice);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
         }
 
         private static void AddCar()
@@ -102,12 +160,20 @@ namespace ConsoleUI
                 ModelYear = 2017,
                 Description = "Mercedes Lacivert 2017"
             });
-
-            foreach (CarDetailDto car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+            if (result.Success == true)
             {
-                Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
-                                  " Günlük Fiyat: " + car.DailyPrice);
+                foreach (CarDetailDto car in result.Data)
+                {
+                    Console.WriteLine("Model: " + car.ModelYear + " Marka: " + car.BrandName + " Renk: " + car.ColorName +
+                                      " Günlük Fiyat: " + car.DailyPrice);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
         }
     }
 
