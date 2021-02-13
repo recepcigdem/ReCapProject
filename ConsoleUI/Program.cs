@@ -24,7 +24,33 @@ namespace ConsoleUI
 
             //DeleteCar();
 
-            CarDetailDto();
+            //CarDetailDto();
+
+            //AddUser();
+            
+            //AddCustomer();
+
+            AddRental();
+        }
+
+        private static void AddRental()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            rentalManager.Add(new Rental() {CarId = 1, CustomerId = 1, ReturnDate = DateTime.Now});
+        }
+
+        private static void AddUser()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            userManager.Add(new User() {FirstName = "Recep", LastName = "Çiğdem", Email = "aa@hotmail.com", Password = "1234"});
+            userManager.Add(new User() {FirstName = "Yavuz", LastName = "Çiğdem", Email = "ba@hotmail.com", Password = "1234"});
+        }
+
+        private static void AddCustomer()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            customerManager.Add(new Customer() {UserId = 1, CompanyName = "Kayra Holding"});
+            customerManager.Add(new Customer() {UserId = 2, CompanyName = "Torku Holding"});
         }
 
         private static void CarDetailDto()
