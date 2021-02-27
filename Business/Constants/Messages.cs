@@ -14,5 +14,6 @@ namespace Business.Constants
         public static string MinCharacter = "Açıklama minimum 2 karakter olmalı";
         public static string MinPrice = "Fiyat 0 dan büyük olmalıdır";
         public static string ReturnDate = "Araç teslim tarihi hatalı";
+        public static string CarImageLimitExceeded = "En fazla beş resim eklenebilir";
     }
 }
