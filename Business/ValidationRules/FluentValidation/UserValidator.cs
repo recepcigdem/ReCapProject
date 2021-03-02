@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-using Entities.Concrete;
+﻿using Core.Entities.Concrete;
 using FluentValidation;
+using System.Text.RegularExpressions;
 
 namespace Business.ValidationRules.FluentValidation
 {
@@ -20,8 +17,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(u => u.Email).NotEmpty();
             RuleFor(u => u.Email).Must(RegexControl).WithMessage("Mail formatı uygun değil");
 
-            RuleFor(u => u.Password).NotEmpty();
-            RuleFor(u => u.Password).MinimumLength(6);
+            RuleFor(u => u.PasswordSalt).NotEmpty();
         }
 
         private bool RegexControl(string arg)

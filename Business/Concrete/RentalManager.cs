@@ -24,7 +24,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Rental>> GetAll()
         {
-            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), true, Messages.Get);
+            return new SuccessDataResult<List<Rental>>( true, Messages.Get, _rentalDal.GetAll());
         }
 
         [ValidationAspect(typeof(RentalValidator))]
@@ -54,7 +54,7 @@ namespace Business.Concrete
 
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()
         {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(), true, Messages.Get);
+            return new SuccessDataResult<List<RentalDetailDto>>( true, Messages.Get,_rentalDal.GetRentalDetails());
         }
         
 

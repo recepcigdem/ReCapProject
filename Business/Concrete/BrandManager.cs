@@ -22,13 +22,13 @@ namespace Business.Concrete
 
         public IDataResult<List<Brand>> GetAll()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), true, Messages.Get);
+            return new SuccessDataResult<List<Brand>>( true, Messages.Get, _brandDal.GetAll());
         }
 
         public IDataResult<Brand> GetById(int id)
         {
 
-            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.Id == id), true, Messages.Get);
+            return new SuccessDataResult<Brand>( true, Messages.Get, _brandDal.Get(b => b.Id == id));
         }
 
 

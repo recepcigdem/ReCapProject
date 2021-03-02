@@ -22,12 +22,12 @@ namespace Business.Concrete
 
         public IDataResult<List<Color>> GetAll()
         {
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), true, Messages.Get);
+            return new SuccessDataResult<List<Color>>( true, Messages.Get, _colorDal.GetAll());
         }
 
         public IDataResult<Color> GetById(int id)
         {
-            return new SuccessDataResult<Color>(_colorDal.Get(c => c.Id == id), true, Messages.Get);
+            return new SuccessDataResult<Color>( true, Messages.Get, _colorDal.Get(c => c.Id == id));
         }
 
         [ValidationAspect(typeof(ColorValidator))]

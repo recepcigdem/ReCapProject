@@ -23,7 +23,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Customer>> GetAll()
         {
-            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(), true, Messages.Get);
+            return new SuccessDataResult<List<Customer>>( true, Messages.Get, _customerDal.GetAll());
         }
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(Customer customer)
@@ -46,7 +46,7 @@ namespace Business.Concrete
 
         public IDataResult<List<CustomerDetailDto>> GetCustomerDetails()
         {
-            return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetails(), true, Messages.Get);
+            return new SuccessDataResult<List<CustomerDetailDto>>( true, Messages.Get, _customerDal.GetCustomerDetails());
         }
     }
 }

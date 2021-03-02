@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Business.Abstract;
+﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.AutoFac.Validation;
+using Core.Entities.Concrete;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
-using Entities.Concrete;
+using System.Collections.Generic;
+
 
 namespace Business.Concrete
 {
@@ -22,12 +21,12 @@ namespace Business.Concrete
 
         public IDataResult<List<User>> GetAll()
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(), true, Messages.Get);
+            return new SuccessDataResult<List<User>>( true, Messages.Get, _userDal.GetAll());
         }
 
         public IDataResult<User> GetById(int id)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u=>u.Id==id), true, Messages.Get);
+            return new SuccessDataResult<User>( true, Messages.Get, _userDal.Get(u => u.Id == id));
         }
 
         [ValidationAspect(typeof(UserValidator))]
@@ -50,6 +49,18 @@ namespace Business.Concrete
             _userDal.Delete(user);
 
             return new SuccessResult(Messages.Delete);
+        }
+
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            return new SuccessDataResult<List<OperationClaim>>(true, Messages.Get,_userDal.GetClaims(user));
+            
+        }
+
+        public IDataResult<User> GetByMail(string email)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+
         }
     }
 }

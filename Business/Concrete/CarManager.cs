@@ -23,7 +23,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), true, Messages.Get);
+            return new SuccessDataResult<List<Car>>( true, Messages.Get, _carDal.GetAll());
         }
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
@@ -47,17 +47,17 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAllByColorId(int colorId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId), true, Messages.Get);
+            return new SuccessDataResult<List<Car>>( true, Messages.Get, _carDal.GetAll(c => c.ColorId == colorId));
         }
 
         public IDataResult<List<Car>> GetAllByBrandId(int brandId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == brandId), true, Messages.Get);
+            return new SuccessDataResult<List<Car>>( true, Messages.Get, _carDal.GetAll(c => c.BrandId == brandId));
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), true, Messages.Get);
+            return new SuccessDataResult<List<CarDetailDto>>( true, Messages.Get,_carDal.GetCarDetails());
         }
     }
 }

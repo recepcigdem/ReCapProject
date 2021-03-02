@@ -27,12 +27,12 @@ namespace Business.Concrete
 
         public IDataResult<List<CarImage>> GetAll()
         {
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(), true, Messages.Get);
+            return new SuccessDataResult<List<CarImage>>( true, Messages.Get, _carImageDal.GetAll());
         }
 
         public IDataResult<CarImage> GetById(int id)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get(ci => ci.Id == id), true, Messages.Get);
+            return new SuccessDataResult<CarImage>(true, Messages.Get, _carImageDal.Get(ci => ci.Id == id));
         }
 
 
@@ -75,7 +75,7 @@ namespace Business.Concrete
 
         public IDataResult<List<CarImage>> GetCarImagesByCarId(int carId)
         {
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(ci => ci.CarId == carId), true, Messages.Get);
+            return new SuccessDataResult<List<CarImage>>(true, Messages.Get, _carImageDal.GetAll(ci => ci.CarId == carId));
         }
 
 
