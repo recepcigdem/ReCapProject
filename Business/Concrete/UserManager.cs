@@ -6,6 +6,10 @@ using Core.Entities.Concrete;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using System.Collections.Generic;
+using Business.BusinessAspects.Autofac;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 
 
 namespace Business.Concrete
@@ -18,24 +22,27 @@ namespace Business.Concrete
         {
             _userDal = userDal;
         }
-
+        [CacheAspect]
         public IDataResult<List<User>> GetAll()
         {
             return new SuccessDataResult<List<User>>( true, Messages.Get, _userDal.GetAll());
         }
-
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<User> GetById(int id)
         {
             return new SuccessDataResult<User>( true, Messages.Get, _userDal.Get(u => u.Id == id));
         }
-
+        [SecuredOperation("admin,user.add")]
         [ValidationAspect(typeof(UserValidator))]
+        [CacheRemoveAspect("IUserService.Get")]
         public IResult Add(User user)
         {
            _userDal.Add(user);
            return new SuccessResult(Messages.Add);
         }
         [ValidationAspect(typeof(UserValidator))]
+        [CacheRemoveAspect("IUserService.Get")]
         public IResult Update(User user)
         {
             _userDal.Update(user);
@@ -61,6 +68,13 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
 
+        }
+        [TransactionScopeAspect]
+        public IResult AddTransactionTest(User user)
+        {
+            Add(user);
+
+            return null;
         }
     }
 }
