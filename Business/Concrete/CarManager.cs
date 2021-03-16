@@ -15,6 +15,7 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         private ICarDal _carDal;
+        private ICarImageService _carImageService;
 
         public CarManager(ICarDal carDal)
         {
@@ -45,19 +46,42 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Delete);
         }
 
-        public IDataResult<List<Car>> GetAllByColorId(int colorId)
+        public IDataResult<List<CarDetailDto>> GetAllByColorId(int colorId)
         {
-            return new SuccessDataResult<List<Car>>( true, Messages.Get, _carDal.GetAll(c => c.ColorId == colorId));
+            return new SuccessDataResult<List<CarDetailDto>>( true, Messages.Get, _carDal.GetCarDetails(c => c.ColorId == colorId));
         }
 
-        public IDataResult<List<Car>> GetAllByBrandId(int brandId)
+        public IDataResult<List<CarDetailDto>> GetAllByBrandId(int brandId)
         {
-            return new SuccessDataResult<List<Car>>( true, Messages.Get, _carDal.GetAll(c => c.BrandId == brandId));
+            return new SuccessDataResult<List<CarDetailDto>>( true, Messages.Get, _carDal.GetCarDetails(c => c.BrandId == brandId));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetAllByCarId(int carId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(true, Messages.Get, _carDal.GetCarDetails(c => c.CarId == carId));
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>( true, Messages.Get,_carDal.GetCarDetails());
+        }
+
+        public IDataResult<CarDetailAndImagesDto> GetCarDetailAndImagesDto(int carId)
+        {
+            var result = _carDal.GetCarDetail(carId);
+            var imageResult = _carImageService.GetAllByCarId(carId);
+            if (result == null || imageResult.Success == false)
+            {
+                return new ErrorDataResult<CarDetailAndImagesDto>(Messages.Get);
+            }
+
+            var carDetailAndImagesDto = new CarDetailAndImagesDto
+            {
+                Car = result,
+                CarImages = imageResult.Data
+            };
+
+            return new SuccessDataResult<CarDetailAndImagesDto>(carDetailAndImagesDto, Messages.Get);
         }
     }
 }

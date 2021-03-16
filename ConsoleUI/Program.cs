@@ -78,7 +78,7 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
             carManager.Delete(new Car
-            { Id = 1 });
+            { CarId = 1 });
             var result = carManager.GetCarDetails();
             if (result.Success == true)
             {
@@ -99,7 +99,7 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
             carManager.Update(new Car
-            { Id = 1, BrandId = 1, ColorId = 1, DailyPrice = 300, Description = "Renault Mavi 2014", ModelYear = 2014 });
+            { CarId = 1, BrandId = 1, ColorId = 1, DailyPrice = 300, Description = "Renault Mavi 2014", ModelYear = 2014 });
             var result = carManager.GetCarDetails();
             if (result.Success == true)
             {

@@ -69,7 +69,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getAllDetails")]
+        [HttpGet("getalldetails")]
         public IActionResult GetAllDetails()
         {
             var result = _carService.GetCarDetails();
@@ -81,7 +81,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getByBrandId")]
+        [HttpGet("getbybrand")]
         public IActionResult GetByBrandId(int brandId)
         {
             var result = _carService.GetAllByBrandId(brandId);
@@ -93,10 +93,21 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getByColorId")]
+        [HttpGet("getbycolor")]
         public IActionResult GetByColorId(int colorId)
         {
             var result = _carService.GetAllByColorId(colorId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
+        [HttpGet("getalldetailbycar")]
+        public IActionResult GetAllDetailByCarId(int carId)
+        {
+            var result = _carService.GetCarDetailAndImagesDto(carId);
             if (result.Success)
             {
                 return Ok(result);

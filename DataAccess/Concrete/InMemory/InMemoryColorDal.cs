@@ -16,8 +16,8 @@ namespace DataAccess.Concrete.InMemory
         {
             _colors = new List<Color>
             {
-                new Color() {Id = 1, ColorName = "Mavi"},
-                new Color() {Id = 2, ColorName = "Kırmızı"}
+                new Color() {ColorId = 1, ColorName = "Mavi"},
+                new Color() {ColorId = 2, ColorName = "Kırmızı"}
 
             };
         }
@@ -41,14 +41,14 @@ namespace DataAccess.Concrete.InMemory
 
         public void Update(Color color)
         {
-            Color colorUpdated = _colors.SingleOrDefault(c => c.Id == color.Id);
+            Color colorUpdated = _colors.SingleOrDefault(c => c.ColorId == color.ColorId);
 
             colorUpdated.ColorName = color.ColorName;
         }
 
         public void Delete(Color color)
         {
-            Color colorDeleted = _colors.SingleOrDefault(c => c.Id == color.Id);
+            Color colorDeleted = _colors.SingleOrDefault(c => c.ColorId == color.ColorId);
 
             _colors.Remove(colorDeleted);
         }

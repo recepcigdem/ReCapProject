@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 
 namespace WebAPI.Controllers
 {
@@ -19,75 +20,48 @@ namespace WebAPI.Controllers
             _carImageService = carImageService;
         }
 
-        [HttpGet("getAll")]
-        public IActionResult GetAll()
-        {
-            var result = _carImageService.GetAll();
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result);
-        }
-
-        [HttpGet("getById")]
-        public IActionResult GetById(int id)
-        {
-            var result = _carImageService.GetById(id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result);
-        }
-
         [HttpPost("add")]
-        public IActionResult Add([FromForm(Name = ("Image"))] IFormFile file, [FromForm] CarImage carImage)
+        [DisableRequestSizeLimit]
+        public IActionResult Add([FromForm] CarImagesOperationDto carImagesOperationDto)
         {
-            var result = _carImageService.Add(file,carImage);
+            var result = _carImageService.Add(carImagesOperationDto);
             if (result.Success)
-            {
                 return Ok(result);
-            }
-
             return BadRequest(result);
         }
 
         [HttpPost("update")]
-        public IActionResult Update([FromForm(Name = ("Image"))] IFormFile file, [FromForm] CarImage carImage)
+        [DisableRequestSizeLimit]
+        public IActionResult Update([FromForm] CarImagesOperationDto carImagesOperationDto)
         {
-            var result = _carImageService.Update(file,carImage);
+            var result = _carImageService.Update(carImagesOperationDto);
             if (result.Success)
-            {
                 return Ok(result);
-            }
-
             return BadRequest(result);
         }
 
         [HttpPost("delete")]
         public IActionResult Delete(CarImage carImage)
         {
-            var result = _carImageService.Delete(carImage);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result);
+            return Ok(_carImageService.Delete(carImage));
         }
 
-        [HttpGet("getimagesbycarid")]
-        public IActionResult GetImagesById(int id)
+        [HttpGet("get")]
+        public IActionResult Get()
         {
-            var result = _carImageService.GetCarImagesByCarId(id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
+            return Ok(_carImageService.GetAll());
+        }
+
+        [HttpGet("getall")]
+        public IActionResult GetAll()
+        {
+            return Ok(_carImageService.GetAll());
+        }
+
+        [HttpGet("getallbycarid")]
+        public IActionResult GetAllByCarId(int carId)
+        {
+            return Ok(_carImageService.GetAllByCarId(carId));
         }
     }
 }

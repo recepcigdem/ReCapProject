@@ -17,11 +17,11 @@ namespace DataAccess.Concrete.InMemory
         {
             _cars = new List<Car>
             {
-                new Car{Id = 1,BrandId = 1,ColorId = 1,DailyPrice = 300,Description = "2020 Renault Mavi",ModelYear = 2020},
-                new Car{Id = 2,BrandId = 2,ColorId = 1,DailyPrice = 550,Description = "2019 Mercedes Mavi",ModelYear = 2019},
-                new Car{Id = 3,BrandId = 2,ColorId = 2,DailyPrice = 500,Description = "2018 Mercedes Kırmızı",ModelYear = 2018},
-                new Car{Id = 4,BrandId = 3,ColorId = 1,DailyPrice = 450,Description = "2020 BMW Mavi",ModelYear = 2020},
-                new Car{Id = 5,BrandId = 3,ColorId = 2,DailyPrice = 400,Description = "2021 BMW Kırmızı",ModelYear = 2021},
+                new Car{CarId = 1,BrandId = 1,ColorId = 1,DailyPrice = 300,Description = "2020 Renault Mavi",ModelYear = 2020},
+                new Car{CarId = 2,BrandId = 2,ColorId = 1,DailyPrice = 550,Description = "2019 Mercedes Mavi",ModelYear = 2019},
+                new Car{CarId = 3,BrandId = 2,ColorId = 2,DailyPrice = 500,Description = "2018 Mercedes Kırmızı",ModelYear = 2018},
+                new Car{CarId = 4,BrandId = 3,ColorId = 1,DailyPrice = 450,Description = "2020 BMW Mavi",ModelYear = 2020},
+                new Car{CarId = 5,BrandId = 3,ColorId = 2,DailyPrice = 400,Description = "2021 BMW Kırmızı",ModelYear = 2021},
 
             };
         }
@@ -46,7 +46,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Update(Car car)
         {
-            var carUpdated = _cars.SingleOrDefault(c => c.Id == car.Id);
+            var carUpdated = _cars.SingleOrDefault(c => c.CarId == car.CarId);
 
             carUpdated.BrandId = car.BrandId;
             carUpdated.ColorId = car.ColorId;
@@ -57,15 +57,21 @@ namespace DataAccess.Concrete.InMemory
 
         public void Delete(Car car)
         {
-            var carDeleted = _cars.SingleOrDefault(c => c.Id == car.Id);
+            var carDeleted = _cars.SingleOrDefault(c => c.CarId == car.CarId);
 
             _cars.Remove(carDeleted);
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public List<CarDetailDto> GetCarDetails(Expression<Func<Car, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
+
+        public CarDetailDto GetCarDetail(int carId)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public List<Car> GetAllByBrandId(int brandId)
         {

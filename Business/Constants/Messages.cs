@@ -1,4 +1,6 @@
 ﻿
+using Entities.Dtos;
+
 namespace Business.Constants
 {
     public static class Messages
@@ -20,5 +22,15 @@ namespace Business.Constants
         public static string SuccessfulLogin = "Giriş Başarılı";
         public static string UserAlreadyExists = "Kullanıcı Mevcut";
         public static string AccessTokenCreated = "Token Oluşturuldu";
+
+        public static string AddCarImageMessage = "Araç resmi başarıyla eklendi";
+        public static string EditCarImageMessage = "Araç resmi başarıyla güncellendi";
+        public static string DeleteCarImageMessage = "Araç resmi başarıyla silindi";
+        public static string AboveImageAddingLimit = "Araç maksimum resim sayısına ulaştı. Resim ekleyemezsiniz";
+        public static string IncorrectFileExtension = "Kabul edilmeyen dosya uzantısı";
+        public static string ImageNotFound = "Resim dosyası bulunamadı.";
+        public static string CarImageNotFound = "Değiştirilmek istenen resim bulunamadı.";
+
+
     }
 }
